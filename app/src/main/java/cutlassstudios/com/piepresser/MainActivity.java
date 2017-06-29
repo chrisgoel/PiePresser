@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //Creating a popup message that notifies the user of the number of pies
                 Context context = getApplicationContext();
-                CharSequence text = "Greetings, " + name + "! You now have " + counter + " pies.";
+                CharSequence text = "Greetings, " + name + "! You are now " + counter + " times thicker than Eric!.";
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
