@@ -33,12 +33,15 @@ public class MainActivity extends AppCompatActivity {
         pie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                counter = getScore(getApplicationContext());
                 counter++;
+
                 name = nameBox.getText().toString();
                 System.out.println(name);
 
                 //Creating a popup message that notifies the user of the number of pies
                 Context context = getApplicationContext();
+                saveScore(context, counter);
                 CharSequence text = "Greetings, " + name + "! You now have " + counter + " pies.";
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
@@ -48,7 +51,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+public void saveScore(Context context,int pies){
 
+    SharedPreferences score = context.getSharedPreferences("Scores",Context.MODE_PRIVATE);
+    SharedPreferences.Editor editor = score.edit();
+    editor.putInt("score",pies);
+    editor.commit();
+}
+public int getScore(Context context){
 
+        SharedPreferences score = context.getSharedPreferences("Scores", Context.MODE_PRIVATE);
+        return score.getInt("score", 0); //0 is the value it returns if shit goes south
+
+}
 
 }
