@@ -18,9 +18,12 @@
         //In the app, it is that space where you saw "Enter Domo Name"
         private EditText nameBox;
         private String name;
+        private Toast toast;
+        //new
 
 
         //ImageButton is the pie image
+
         private ImageButton pie;
         private int counter = 0;
 
@@ -29,12 +32,20 @@
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             //Assigning a reference to the XML file that holds the locations of each widget (EditText, Buttons, etc)
+
             setContentView(R.layout.activity_main);
+
+
+
             nameBox = (EditText)findViewById(R.id.editText);
             pie = (ImageButton)findViewById(R.id.imageButton);
 
+
             //sets the name in the text box
             nameBox.setText(getName(getApplicationContext()), TextView.BufferType.EDITABLE);
+
+
+
 
             //things that happen when the thing is clicked
             pie.setOnClickListener(new View.OnClickListener() {
@@ -45,16 +56,20 @@
                     counter++;
 
                     //sets name to previous save
-                   // name = getName(getApplicationContext());
+                      name = nameBox.getText().toString();
 
-                    name = nameBox.getText().toString();
+                    //cancels the previous toast to prevent back log
+                if(toast != null)
+                    toast.cancel();
+
 
                     //Creating a popup message that notifies the user of the number of pies
                     Context context = getApplicationContext();
                     saveScore(context, counter);
                     CharSequence text = "Greetings, " + name + "! You now have " + counter + " pies.";
                     int duration = Toast.LENGTH_SHORT;
-                    Toast toast = Toast.makeText(context, text, duration);
+                   // Toast toast = Toast.makeText(context, text, duration);
+                    toast = Toast.makeText(context, text, duration);
                     toast.show();
 
 
@@ -63,6 +78,7 @@
 
                 }
             });
+
         }
 
     //saves the score
